@@ -51,20 +51,53 @@ Edit `config.yaml`:
 ### 3. Run
 
 ```bash
-# Generate a full podcast-style audio digest
-screen-time-saver generate
+python app.py
+```
 
+That's it. The app walks you through everything:
+
+```
+  [1/4]  Fetching content from your sources...
+    3Blue1Brown                     3 items
+    Fireship                        5 items
+    TechCrunch                      10 items
+
+  [2/4]  Summarising with Claude AI...
+    "Tech Moves Fast So You Don't Have To"
+    ~8 minute read
+
+  [3/4]  Generating podcast audio...
+    Audio:      output/digest.mp3
+    Captions:   output/captions.srt
+    Transcript: output/transcript.txt
+    Show notes: output/show_notes.md
+
+  [4/4]  Delivery: not configured (edit config.yaml to enable)
+
+  ========================================
+  All done!  Your digest is in ./output/
+  Listen:  open output/digest.mp3
+  ========================================
+```
+
+If anything is missing (no config file, no API key), `app.py` tells you exactly what to do — no cryptic error messages.
+
+### Advanced CLI
+
+For more control, you can also use the full CLI:
+
+```bash
 # Text-only (skip audio generation)
 screen-time-saver generate --no-audio
 
 # Use a different summarisation style
 screen-time-saver generate --style briefing
 
-# Validate your config without running
-screen-time-saver validate
-
 # Generate and deliver via Twilio call + Telegram
 screen-time-saver generate --deliver
+
+# Validate your config without running
+screen-time-saver validate
 
 # List available TTS voices
 screen-time-saver list-voices
