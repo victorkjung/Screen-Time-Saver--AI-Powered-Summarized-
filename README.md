@@ -18,7 +18,7 @@ config.yaml
 Fetch content          (YouTube transcripts, RSS feeds, Twitter/X posts)
     |
     v
-Claude AI summary      (one coherent narrative, not disjointed bullet points)
+AI summary (Claude or OpenAI)  (one coherent narrative, not disjointed bullet points)
     |
     v
 edge-tts audio         (free, high-quality text-to-speech)
@@ -46,6 +46,7 @@ cp config.example.yaml config.yaml
 
 Edit `config.yaml`:
 - Set your `anthropic_api_key` (or export `ANTHROPIC_API_KEY` as an env var)
+  - **OpenAI alternative:** set `summarizer.model` to any `gpt-*` / `o1-*` / `o3-*` / `o4-*` model and export `OPENAI_API_KEY`. The summarizer auto-routes based on model name.
 - Add the YouTube channels, RSS feeds, and Twitter accounts you follow
 
 ### 3. Validate your config
@@ -119,7 +120,7 @@ See [`config.example.yaml`](config.example.yaml) for the full annotated config.
 
 | Platform | How it works | Requirements |
 |----------|-------------|--------------|
-| **YouTube** | Extracts video transcripts via yt-dlp | None (no API key needed) |
+| **YouTube** | `yt-dlp` lists channel videos; `youtube-transcript-api` fetches transcripts | None for residential IPs. **Datacenter IPs need a SOCKS5 proxy** — set `YOUTUBE_PROXY_URL=socks5://HOST:PORT` (e.g. an SSH tunnel to a residential machine). YouTube blocks the transcript endpoint from datacenter ranges. |
 | **RSS** | Parses any standard RSS/Atom feed | Feed URL |
 | **Twitter/X** | Uses Nitter RSS bridge for public profiles | None (no login needed) |
 
@@ -194,8 +195,9 @@ These live in `.claude/commands/` and work automatically when Claude Code is run
 
 ## Tech stack
 
-- **[Claude API](https://docs.anthropic.com/)** — intelligent, context-aware summarisation
-- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** — YouTube transcript extraction
+- **[Claude API](https://docs.anthropic.com/)** / **[OpenAI API](https://platform.openai.com/)** — intelligent, context-aware summarisation (auto-routed by model name)
+- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** — YouTube channel listing
+- **[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)** — transcript extraction (no PO token required, supports SOCKS proxy for datacenter IP egress)
 - **[edge-tts](https://github.com/rany2/edge-tts)** — free, high-quality text-to-speech with word-level timing
 - **[feedparser](https://github.com/kurtmckee/feedparser)** — RSS/Atom feed parsing
 - **[Typer](https://typer.tiangolo.com/)** — CLI framework
@@ -205,4 +207,4 @@ These live in `.claude/commands/` and work automatically when Claude Code is run
 
 ## License
 
-Apache 2.0 — see [LICENSE](LICENSE).
+GPL-3.0 — see [LICENSE](LICENSE).

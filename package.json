@@ -1,4 +1,4 @@
-{"name": "Screen-Time-Saver--AI-Powered-Summarized-",
+{"name": "screen-time-saver-ai-powered-summarized",
   "version": "1.0.0",
   "license": "GPL-3.0-only",
   "description": "AI-Powered Summarized Screen Time App",
@@ -8,8 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/victorkjung/Screen-Time-Saver--AI-Powered-Summarized-.git"
+    "url": "git+https://github.com/victorkjung/Screen-Time-Saver-AI-Powered-Summarized.git"
   },
   "author": "victorkjung",
-  "homepage": "https://github.com/victorkjung/Screen-Time-Saver--AI-Powered-Summarized-#readme"
+  "homepage": "https://github.com/victorkjung/Screen-Time-Saver-AI-Powered-Summarized#readme"
 }
